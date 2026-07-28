@@ -1,0 +1,9 @@
+{
+    "recommendations": [
+        "github.vscode-github-actions",
+        "golang.go",
+        "ms-vscode.makefile-tools",
+        "ms-azuretools.vscode-containers",
+        "hashicorp.hcl"
+    ]
+}
