@@ -4,7 +4,7 @@ LABEL maintainer="Tom Helander <thomas.helander@gmail.com>"
 RUN apk add make curl git
 
 WORKDIR /src
-COPY go.mod go.sum ./
+COPY .git go.mod go.sum ./
 RUN go mod download
 
 COPY . .
