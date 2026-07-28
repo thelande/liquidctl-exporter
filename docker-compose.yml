@@ -2,6 +2,7 @@ services:
   liquidctl-exporter:
     image: thelande/liquidctl-exporter:rolling
     container_name: liquidctl-exporter
+    build: .
     restart: unless-stopped
     ports:
       - "9530:9530"
