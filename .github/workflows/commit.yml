@@ -89,5 +89,5 @@ jobs:
 
           # GH requires all files to have different names, so add version/arch to differentiate
           foreach($Arch in "amd64", "arm64") {
-            Move-Item output\$Arch\go_exporter_tmpl.exe output\go_exporter_tmpl-$Version-$Arch.exe
+            Move-Item output\$Arch\liquidctl-exporter.exe output\liquidctl-exporter-$Version-$Arch.exe
           }

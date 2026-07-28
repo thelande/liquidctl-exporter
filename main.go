@@ -1,5 +1,5 @@
 /*
-Copyright 2024-2026 Thomas Helander
+Copyright 2026 Thomas Helander
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import (
 	"os"
 
 	kingpin "github.com/alecthomas/kingpin/v2"
-	"github.com/thelande/go_exporter_tmpl/pkg/collector"
+	"github.com/thelande/liquidctl-exporter/pkg/collector"
 
 	"github.com/prometheus/client_golang/prometheus"
 	versioncollector "github.com/prometheus/client_golang/prometheus/collectors/version"
@@ -34,8 +34,8 @@ import (
 )
 
 const (
-	exporterName  = "go_exporter_tmpl"
-	exporterTitle = "Go Exporter Template"
+	exporterName  = "liquidctl-exporter"
+	exporterTitle = "Prometheus exporter for liquidctl"
 )
 
 var (
@@ -43,7 +43,7 @@ var (
 		"web.telemetry-path",
 		"Path under which to expose metrics.",
 	).Default("/metrics").String()
-	toolkitFlags = kingpinflag.AddFlags(kingpin.CommandLine, ":9816")
+	toolkitFlags = kingpinflag.AddFlags(kingpin.CommandLine, ":9530")
 )
 
 func main() {
@@ -58,19 +58,19 @@ func main() {
 	logger.Info(fmt.Sprintf("Starting %s", exporterName), "version", version.Info())
 	logger.Info("Build context", "build_context", version.BuildContext())
 
-	collector := collector.Collector{}
+	collector := collector.NewCollector(logger)
 
 	// Uncomment the following three lines and comment out prometheus.MustRegister(...)
 	// to exclude the go metrics. Make sure to swap line 89 and 90 as well.
 	// registry := prometheus.NewRegistry()
-	// registry.MustRegister(versioncollector.NewCollector("sdtd_exporter"))
+	// registry.MustRegister(versioncollector.NewCollector(exporterName))
 	// registry.MustRegister(collector)
 	prometheus.MustRegister(collector)
-	prometheus.MustRegister(versioncollector.NewCollector("sdtd_exporter"))
+	prometheus.MustRegister(versioncollector.NewCollector(exporterName))
 
 	landingConfig := web.LandingConfig{
 		Name:        exporterTitle,
-		Description: "Prometheus go-based Exporter",
+		Description: "Prometheus Exporter for liquidctl",
 		Version:     version.Info(),
 		Links: []web.LandingLinks{
 			{

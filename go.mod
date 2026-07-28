@@ -1,4 +1,4 @@
-module github.com/thelande/go_exporter_tmpl
+module github.com/thelande/liquidctl-exporter
 
 go 1.26.0
 

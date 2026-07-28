@@ -17,8 +17,10 @@ LABEL maintainer="Tom Helander <thomas.helander@gmail.com>"
 
 WORKDIR /app
 
-COPY --from=builder /src/output/go_exporter_tmpl .
+RUN apk add liquidctl
+
+COPY --from=builder /src/output/liquidctl-exporter .
 
 EXPOSE 9810
 
-ENTRYPOINT ["/app/go_exporter_tmpl"]
+ENTRYPOINT ["/app/liquidctl-exporter"]

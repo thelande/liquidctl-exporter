@@ -55,14 +55,14 @@ jobs:
         make crossbuild
         TAG_NAME="${GITHUB_REF##*/v}"
         for arch in amd64 arm64; do
-          mv output/$arch/go_exporter_tmpl output/go_exporter_tmpl-${TAG_NAME}-linux.${arch}
+          mv output/$arch/liquidctl-exporter output/liquidctl-exporter-${TAG_NAME}-linux.${arch}
         done
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v7
       with:
-        name: go_exporter_tmpl_binaries_linux
-        path: output/go_exporter_tmpl-*
+        name: liquidctl-exporter_binaries_linux
+        path: output/liquidctl-exporter-*
 
     - name: Release
       if: startsWith(github.ref, 'refs/tags/')
@@ -70,7 +70,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         TAG_NAME="${GITHUB_REF##*/}"
-        for i in output/go_exporter_tmpl-*; do
+        for i in output/liquidctl-exporter-*; do
           gh release upload $TAG_NAME $i
         done
 
@@ -114,14 +114,14 @@ jobs:
 
           # GH requires all files to have different names, so add version/arch to differentiate
           foreach($Arch in "amd64", "arm64") {
-            Move-Item output\$Arch\go_exporter_tmpl.exe output\go_exporter_tmpl-$Version-$Arch.exe
+            Move-Item output\$Arch\liquidctl-exporter.exe output\liquidctl-exporter-$Version-$Arch.exe
           }
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
-          name: go_exporter_tmpl_binaries_windows
-          path: output\go_exporter_tmpl-*.exe
+          name: liquidctl-exporter_binaries_windows
+          path: output\liquidctl-exporter-*.exe
 
       - name: Release
         if: startsWith(github.ref, 'refs/tags/')
@@ -129,4 +129,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           $TagName = $env:GITHUB_REF -replace 'refs/tags/', ''
-          Get-ChildItem -Path output\* -Include @('go_exporter_tmpl*.exe', 'sha256sums.txt') | Foreach-Object {gh release upload $TagName $_}
+          Get-ChildItem -Path output\* -Include @('liquidctl-exporter*.exe', 'sha256sums.txt') | Foreach-Object {gh release upload $TagName $_}

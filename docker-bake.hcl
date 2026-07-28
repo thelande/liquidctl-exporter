@@ -1,6 +1,6 @@
 DATE = formatdate("YYYY.MM.DD", timestamp())
-APP = "go_exporter_tmpl"
-SOURCE = "https://github.com/thelande/go_exporter_tmpl"
+APP = "liquidctl-exporter"
+SOURCE = "https://github.com/thelande/liquidctl-exporter"
 variable "GIT_SHA" {}
 
 variable "VERSION" {
@@ -16,7 +16,7 @@ target "image" {
     args = {}
     labels = {
         "org.opencontainers.image.vendor" = "thelande"
-        "org.opencontainers.image.source" = "https://github.com/thelande/go_exporter_tmpl"
+        "org.opencontainers.image.source" = "https://github.com/thelande/liquidctl-exporter"
         "org.opencontainers.image.created" = "${DATE}"
         "org.opencontainers.image.revision" = "${GIT_SHA}"
         "org.opencontainers.image.title" = "${APP}"
