@@ -1,0 +1,14 @@
+services:
+  liquidctl-exporter:
+    image: thelande/liquidctl-exporter:rolling
+    container_name: liquidctl-exporter
+    restart: unless-stopped
+    ports:
+      - "9530:9530"
+    devices:
+      - /dev/hidraw1:/dev/hidraw1
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:9530"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
