@@ -17,7 +17,7 @@ LABEL maintainer="Tom Helander <thomas.helander@gmail.com>"
 
 WORKDIR /app
 
-RUN apk add liquidctl
+RUN apk add curl liquidctl
 
 COPY --from=builder /src/output/liquidctl-exporter .
 
