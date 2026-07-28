@@ -44,7 +44,7 @@ cd liquidctl-exporter
 make build
 
 # The binary will be available at ./output/liquidctl-exporter
-./liquidctl-exporter
+./output/liquidctl-exporter
 ```
 
 ### Using Docker
@@ -165,7 +165,7 @@ docker buildx bake image-local
 docker buildx bake image-all
 
 # Push to Docker Hub
-docker buildx bake image-local --push
+docker buildx bake image-all --push
 ```
 
 ## License
