@@ -27,7 +27,6 @@ The exporter exposes the following metrics:
 
 ## Requirements
 
-- Linux (recommended), macOS, or Windows
 - Go 1.26 or later
 - Docker (for containerized deployment)
 - liquidctl installed on the host system (for Docker)
