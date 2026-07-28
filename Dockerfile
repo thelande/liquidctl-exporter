@@ -21,6 +21,6 @@ RUN apk add liquidctl
 
 COPY --from=builder /src/output/liquidctl-exporter .
 
-EXPOSE 9810
+EXPOSE 9530
 
 ENTRYPOINT ["/app/liquidctl-exporter"]
