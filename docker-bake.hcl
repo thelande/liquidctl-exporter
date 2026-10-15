@@ -4,7 +4,7 @@ SOURCE = "https://github.com/thelande/liquidctl-exporter"
 variable "GIT_SHA" {}
 
 variable "VERSION" {
-  default = "0.1.2"
+  default = "0.1.3"
 }
 
 group "default" {
